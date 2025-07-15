@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { JSX } from "react";
 export default function MainPage(): JSX.Element{
     return(

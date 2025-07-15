@@ -1,11 +1,13 @@
-"use client"
+"use client";
 import "./globals.css"
 import styles from "./page.module.css"
 import { auth , googleProvider , githubProvider } from "./firebaseConfig"
-import { AuthError, GithubAuthProvider, GoogleAuthProvider , signInWithPopup, signInWithRedirect } from "firebase/auth"
+import { AuthError, GithubAuthProvider, GoogleAuthProvider , signInWithPopup } from "firebase/auth"
 import { userInfo } from "@/supabase/userInfo"
 import { loadUserInfo } from "@/supabase/dbLoad"
 import { useEffect } from "react"
+import { useRouter } from "next/navigation"
+
 
 interface GoogleUserInfo{
   email : string
@@ -17,16 +19,15 @@ interface GoogleUserInfo{
 }
 
 export default function Home() {
-  useEffect(()=>{
-    googleSignIn()
-  } , [])
+
+  const router = useRouter()
 
   const googleSignIn = async()=>{
     try {
       const popup = await signInWithPopup(auth , googleProvider)
       const credential = GoogleAuthProvider.credentialFromResult(popup)
-      const loadResult = await loadUserInfo(popup?.user?.uid)
-      
+      const loadResult = await loadUserInfo(popup?.user?.uid , router)
+      console.log(loadResult)
       console.log(credential)
       const res = await fetch("https://www.googleapis.com/oauth2/v3/userinfo" , {
         method : "GET",
@@ -36,8 +37,6 @@ export default function Home() {
       })
       const response : GoogleUserInfo = await res.json()
       console.log("USer info : " , response)
-
-      console.log(loadResult)
       const {data , error} = await userInfo(response?.name , response?.email , response?.given_name , response?.picture , popup?.user?.uid)
       if (data) {console.log("no err" , data)}
       else {console.log("error" , error)}
@@ -46,6 +45,11 @@ export default function Home() {
       console.log("Signup error : " , credentialError)
     }
   }
+
+
+useEffect(()=>{
+  googleSignIn()
+  } , [])
 
 
 
