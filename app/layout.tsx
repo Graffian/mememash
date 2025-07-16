@@ -2,12 +2,13 @@
 import React, { JSX , createContext , useContext , useState } from "react";
 
 import "./globals.css"
-import { error } from "console";
 type NameContextType = {
   name: string;
   setName: (name: string) => void;
 };
 const NameContext = createContext<NameContextType | undefined>(undefined)
+
+
 export default function RootLayout({
   children
 }:Readonly<{children:React.ReactNode}>):JSX.Element{
