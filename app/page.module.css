@@ -1,15 +1,287 @@
-.landingPage{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: aliceblue;
-    flex-direction: column;
-
+.landingPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: aliceblue;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 3rem;
 }
-.signIn{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    gap:20px;
+
+.header {
+  text-align: center;
+  animation: fadeInUp 1s ease-out;
+}
+
+.title {
+  font-size: 5rem;
+  font-weight: 800;
+  margin: 0;
+  font-family: "Inter", "Helvetica Neue", sans-serif;
+  letter-spacing: -0.05em;
+  background: linear-gradient(
+    135deg,
+    #ff6b6b 0%,
+    #4ecdc4 25%,
+    #45b7d1 50%,
+    #96ceb4 75%,
+    #feca57 100%
+  );
+  background-size: 400% 400%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 4s ease-in-out infinite;
+  text-shadow: 0 8px 32px rgba(255, 107, 107, 0.3);
+  line-height: 0.9;
+}
+
+.subtitle {
+  font-size: 1.75rem;
+  margin: 1.5rem 0;
+  color: #feca57;
+  font-weight: 700;
+  font-family: "Inter", sans-serif;
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 10px rgba(254, 202, 87, 0.4);
+}
+
+.description {
+  font-size: 1.2rem;
+  color: #d1d5db;
+  max-width: 650px;
+  line-height: 1.7;
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+.conceptDemo {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 2rem;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  animation: fadeInUp 1s ease-out 0.3s both;
+}
+
+.howItWorks {
+  text-align: center;
+  color: #4ecdc4;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-shadow: 0 2px 8px rgba(78, 205, 196, 0.3);
+}
+
+.memeVoting {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.memeCard {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.memeCard:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.15);
+  border-color: #4ecdc4;
+  box-shadow: 0 10px 25px rgba(78, 205, 196, 0.3);
+}
+
+.mockMeme {
+  font-size: 4rem;
+  margin-bottom: 0.5rem;
+  transition: transform 0.3s ease;
+}
+
+.memeCard:hover .mockMeme {
+  transform: scale(1.2);
+}
+
+.vs {
+  font-size: 1.8rem;
+  font-weight: 800;
+  font-family: "Inter", sans-serif;
+  letter-spacing: 0.1em;
+  color: #ff6b6b;
+  text-shadow: 0 2px 10px rgba(255, 107, 107, 0.5);
+  animation: pulse 2s infinite;
+}
+
+.voteExplanation {
+  text-align: center;
+  color: #9ca3af;
+  font-style: normal;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+  opacity: 0.9;
+}
+
+.authSection {
+  text-align: center;
+  animation: fadeInUp 1s ease-out 0.6s both;
+}
+
+.authTitle {
+  color: #feca57;
+  margin-bottom: 2rem;
+  font-size: 1.75rem;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 10px rgba(254, 202, 87, 0.4);
+}
+
+.signIn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.googleBtn,
+.githubBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  font-family: "Inter", sans-serif;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 250px;
+  position: relative;
+  overflow: hidden;
+}
+
+.googleBtn {
+  background: linear-gradient(45deg, #4285f4, #34a853);
+  color: white;
+  box-shadow: 0 4px 15px rgba(66, 133, 244, 0.3);
+}
+
+.googleBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(66, 133, 244, 0.4);
+  background: linear-gradient(45deg, #3367d6, #2d9536);
+}
+
+.githubBtn {
+  background: linear-gradient(45deg, #333, #555);
+  color: white;
+  box-shadow: 0 4px 15px rgba(51, 51, 51, 0.3);
+}
+
+.githubBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(51, 51, 51, 0.4);
+  background: linear-gradient(45deg, #24292e, #444);
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.welcomeSection {
+  background: rgba(78, 205, 196, 0.1);
+  border-radius: 15px;
+  padding: 1.5rem;
+  border: 1px solid rgba(78, 205, 196, 0.3);
+  animation: fadeInUp 1s ease-out 0.9s both;
+}
+
+.welcomeText {
+  color: #4ecdc4;
+  margin: 0;
+  font-size: 1.4rem;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-shadow: 0 2px 8px rgba(78, 205, 196, 0.3);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .memeVoting {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .vs {
+    transform: rotate(90deg);
+  }
+
+  .signIn {
+    width: 100%;
+  }
+
+  .googleBtn,
+  .githubBtn {
+    min-width: 200px;
+  }
 }
