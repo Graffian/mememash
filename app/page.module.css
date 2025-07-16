@@ -73,7 +73,11 @@
   text-align: center;
   color: #4ecdc4;
   margin-bottom: 1.5rem;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-shadow: 0 2px 8px rgba(78, 205, 196, 0.3);
 }
 
 .memeVoting {
