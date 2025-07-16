@@ -1,15 +1,11 @@
 import React, { JSX } from "react";
 
-export default function RootLayout(
+export default function MainLayout(
     {children}:Readonly<{children : React.ReactNode}>
 ):JSX.Element{
     return(
-        <html lang="en">
-            <body>
-                <div style={{backgroundColor : "black"}}>
-                    {children}
-                </div>
-            </body>
-        </html>
+        <div style={{backgroundColor : "black"}}>
+            {children}
+        </div>
     )
 }

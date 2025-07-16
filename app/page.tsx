@@ -5,9 +5,10 @@ import { auth , googleProvider , githubProvider } from "./firebaseConfig"
 import { AuthError, GithubAuthProvider, GoogleAuthProvider , signInWithPopup } from "firebase/auth"
 import { userInfo } from "@/supabase/userInfo"
 import { loadUserInfo } from "@/supabase/dbLoad"
-import { useEffect } from "react"
+import { useEffect , useState } from "react"
 import { useRouter } from "next/navigation"
-
+import { usePathname } from "next/navigation";
+import { useNameState } from "./layout";
 
 interface GoogleUserInfo{
   email : string
@@ -16,19 +17,21 @@ interface GoogleUserInfo{
   name : string
   picture : string
   sub : string
+  user_uid : string
 }
 
 export default function Home() {
-
+  const {name , setName} = useNameState()
+  const [userId , setUserId] = useState<string>("")
   const router = useRouter()
+  const pathname = usePathname()
+
 
   const googleSignIn = async()=>{
     try {
       const popup = await signInWithPopup(auth , googleProvider)
+      setUserId(popup?.user?.uid)
       const credential = GoogleAuthProvider.credentialFromResult(popup)
-      const loadResult = await loadUserInfo(popup?.user?.uid , router)
-      console.log(loadResult)
-      console.log(credential)
       const res = await fetch("https://www.googleapis.com/oauth2/v3/userinfo" , {
         method : "GET",
         headers:{
@@ -36,10 +39,13 @@ export default function Home() {
         }
       })
       const response : GoogleUserInfo = await res.json()
-      console.log("USer info : " , response)
-      const {data , error} = await userInfo(response?.name , response?.email , response?.given_name , response?.picture , popup?.user?.uid)
-      if (data) {console.log("no err" , data)}
-      else {console.log("error" , error)}
+      if(!response){
+        return
+      }else{
+        console.log("USER INFO" , response)
+      }
+      const userUpdate = await userInfo(response?.name , response?.email , response?.given_name , response?.picture , popup?.user?.uid)
+      console.log(userUpdate)
     } catch (error : AuthError) {
       const credentialError = GoogleAuthProvider.credentialFromError(error)
       console.log("Signup error : " , credentialError)
@@ -48,8 +54,22 @@ export default function Home() {
 
 
 useEffect(()=>{
-  googleSignIn()
-  } , [])
+  const newUserCheck = async()=>{
+    console.log(pathname)
+    try {
+      if(userId != ""){
+        console.log(pathname)
+      const name:GoogleUserInfo = await loadUserInfo(userId , router)
+      console.log("user name: "  , name.name)
+      setName(name.name)
+    }
+    } catch (error) {
+      console.log("err h")
+      console.log(error)
+    }
+}
+newUserCheck()
+  } , [userId , pathname])
 
 
 
@@ -85,6 +105,7 @@ useEffect(()=>{
           <button onClick={googleSignIn} style={{cursor:"pointer"}}>SignIn With Google</button>
           <button onClick={githubSignIn} style={{cursor:"pointer"}}>SignIn with Github</button>
         </div>
+        <h2 style={{backgroundColor:"red"}}>{name}</h2>
       </div>
     </>
   )
