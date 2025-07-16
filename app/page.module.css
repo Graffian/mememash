@@ -116,9 +116,12 @@
 }
 
 .vs {
-  font-size: 1.5rem;
-  font-weight: bold;
+  font-size: 1.8rem;
+  font-weight: 800;
+  font-family: "Inter", sans-serif;
+  letter-spacing: 0.1em;
   color: #ff6b6b;
+  text-shadow: 0 2px 10px rgba(255, 107, 107, 0.5);
   animation: pulse 2s infinite;
 }
 
